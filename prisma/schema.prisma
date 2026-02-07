@@ -1,38 +1,171 @@
-// Flyp ERP Database Schema
+// This is the Prisma schema for Flyp ERP
 
-model User {
-  id        Int    @id @default(autoincrement())
-  name      String
-  email     String @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  roles     Role[]
+// Define the data source
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Product {
+// Define the generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the models
+model Tenant {
   id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  price       Float
-  stock       Int
+  name        String   @unique
+  users       User[]   @relation("TenantUsers")
+  memberships Membership[]
+  plans       Plan[]
+  subscriptions Subscription[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-model Order {
-  id          Int      @id @default(autoincrement())
-  userId      Int
-  productId   Int
-  quantity     Int
-  totalPrice   Float
-  orderDate    DateTime @default(now())
-  user        User    @relation(fields: [userId], references: [id])
-  product     Product @relation(fields: [productId], references: [id])
+model User {
+  id            Int                     @id @default(autoincrement())
+  email         String                  @unique
+  password      String
+  tenantId      Int
+  tenant        Tenant                  @relation(fields: [tenantId], references: [id])
+  memberships    Membership[]            
+  moduleAccess  ModuleAccess[]
+  auditLogs      AuditLog[]            
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
-model Role {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  users User[]
+model Membership {
+  id          Int      @id @default(autoincrement())
+  tenantId    Int
+  planId      Int
+  startDate   DateTime
+  endDate     DateTime?
+  status      String   // e.g., 'active', 'inactive'
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  plan        Plan     @relation(fields: [planId], references: [id])
+}
+
+model Plan {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  price       Float
+  duration    Int // duration in months
+  tenantId    Int
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  planId      Int
+  startDate   DateTime
+  endDate     DateTime?
+  status      String   // e.g., 'active', 'inactive'
+  user        User     @relation(fields: [userId], references: [id])
+  plan        Plan     @relation(fields: [planId], references: [id])
+  payments    Payment[]
+}
+
+model Payment {
+  id              Int      @id @default(autoincrement())
+  subscriptionId  Int
+  amount          Float
+  paymentDate     DateTime
+  status          String   // e.g., 'successful', 'failed'
+  subscription    Subscription @relation(fields: [subscriptionId], references: [id])
+}
+
+model Customer {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String? @unique
+  phone    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id       Int      @id @default(autoincrement())
+  name     String
+  price    Float
+  supplierId Int
+  supplier  Supplier @relation(fields: [supplierId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Supplier {
+  id       Int      @id @default(autoincrement())
+  name     String
+  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sale {
+  id         Int        @id @default(autoincrement())
+  customerId Int
+  total      Float
+  saleDate   DateTime   @default(now())
+  items      SaleItem[]
+  customer   Customer     @relation(fields: [customerId], references: [id])
+}
+
+model SaleItem {
+  id         Int     @id @default(autoincrement())
+  productId  Int
+  saleId     Int
+  quantity    Int
+  price       Float
+  sale       Sale       @relation(fields: [saleId], references: [id])
+  product     Product    @relation(fields: [productId], references: [id])
+}
+
+model AccountReceivable {
+  id          Int      @id @default(autoincrement())
+  customerId  Int
+  amount      Float
+  dueDate     DateTime
+  customer    Customer @relation(fields: [customerId], references: [id])
+}
+
+model AccountPayable {
+  id          Int      @id @default(autoincrement())
+  supplierId  Int
+  amount      Float
+  dueDate     DateTime
+  supplier    Supplier @relation(fields: [supplierId], references: [id])
+}
+
+model CashEntry {
+  id         Int      @id @default(autoincrement())
+  amount     Float
+  entryDate  DateTime @default(now())
+  type       String
+}
+
+model StockMovement {
+  id         Int      @id @default(autoincrement())
+  productId  Int
+  quantity    Int
+  movementDate DateTime @default(now())
+  product    Product @relation(fields: [productId], references: [id])
+}
+
+model ModuleAccess {
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  module    String  // e.g., 'Sales', 'Inventory'
+  user     User  @relation(fields: [userId], references: [id])
+}
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  action     String // e.g., 'create', 'update', 'delete'
+  timestamp  DateTime @default(now())
+  user      User  @relation(fields: [userId], references: [id])
 }
