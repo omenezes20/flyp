@@ -1,49 +1,52 @@
-# Flyp
+# Flyp ERP (SaaS)
 
-## Project Overview
+Monorepo com frontend, backend (API routes) e banco de dados para o Flyp ERP. Inclui tema claro/escuro, i18n (pt-BR/en/es), autenticação demo, RBAC base, módulos e seed inicial.
 
-Flyp is a project designed to streamline and enhance the process of managing and organizing tasks effectively. Leveraging the power of modern web technologies, Flyp offers a user-friendly interface and seamless integrations.
+## Stack
+- Next.js 14 (App Router) + TypeScript
+- TailwindCSS + shadcn/ui tokens
+- next-intl (pt-BR, en, es)
+- next-themes (light/dark/system)
+- Prisma + PostgreSQL
+- NextAuth (Credentials)
+- Stripe + Mercado Pago (placeholders)
 
-## Features
-- User authentication
-- Task management
-- Team collaboration
+## Ambiente
+Crie o arquivo `.env` baseado no `.env.example`.
 
-## Setup Instructions
+```bash
+cp .env.example .env
+```
 
-### Prerequisites
-- Node.js 14 or higher
-- npm 6 or higher
+## Instalação
+```bash
+npm install
+```
 
-### Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/omenezes20/flyp.git
-    cd flyp
-    ```
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
+## Banco de dados
+```bash
+npx prisma generate
+npx prisma migrate dev
+npx prisma db seed
+```
 
-### Starting the Development Server
-- Use the following command to start the development server:
-    ```bash
-    npm start
-    ```
-- The application will be available at `http://localhost:3000`. 
+## Rodar local
+```bash
+npm run dev
+```
 
-### Running Tests
-- To run tests, use:
-    ```bash
-    npm test
-    ```
+## Stripe CLI (webhooks)
+```bash
+stripe login
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+```
 
-## Project Documentation
-Documentation for various components and APIs can be found in the `docs` directory.
+## Mercado Pago
+Use o sandbox e configure o webhook para:
+```
+http://localhost:3000/api/mercadopago/webhook
+```
 
-## Contributing
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on code of conduct, and the process for submitting pull requests.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Notas
+- As chaves Stripe/Mercado Pago estão como placeholders em `.env.example`.
+- O login demo está em `demo@flyp.com / demo123`.

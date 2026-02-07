@@ -1,0 +1,29 @@
+{
+  "landing": {
+    "modules": "Módulos",
+    "pricing": "Precios",
+    "access": "Acceder al sistema",
+    "subtitle": "Gestión empresarial completa e inteligente",
+    "headline": "Centraliza ventas, inventario, finanzas y operaciones en un ERP moderno y accesible.",
+    "ctaStart": "Comenzar gratis por 14 días",
+    "ctaPlans": "Ver planes",
+    "moduleRetail": "Retail inteligente",
+    "moduleMarket": "Mercados y mayoristas",
+    "moduleWorkshop": "Talleres y servicios",
+    "moduleDealer": "Concesionarias",
+    "moduleServices": "Servicios recurrentes",
+    "moduleControl": "Control operativo",
+    "moduleDesc": "Flujos completos con automatización e indicadores en tiempo real."
+  },
+  "pricing": {
+    "title": "Planes para crecer contigo",
+    "subtitle": "Elige el plan ideal y activa módulos según tu operación.",
+    "cta": "Empezar ahora"
+  },
+  "dashboard": {
+    "title": "Tablero",
+    "subtitle": "Resumen operativo e indicadores clave.",
+    "modules": "Módulos del sistema",
+    "activities": "Actividades recientes"
+  }
+}

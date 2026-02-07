@@ -1,1 +1,48 @@
-{"name": "flyp-erp","version": "1.0.0","dependencies": {"next": "14.x","@prisma/client": "latest","next-auth": "latest","stripe": "latest","mercadopago": "latest","tailwindcss": "latest","@shadcn/ui": "latest","i18next": "latest","react-i18next": "latest"},"devDependencies": {"prisma": "latest","typescript": "latest"},"scripts": {"dev": "next dev","build": "next build","start": "next start"},"engines": {"node": ">=14.x"}}
+{
+  "name": "flyp-erp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "prisma db seed"
+  },
+  "dependencies": {
+    "@prisma/client": "latest",
+    "@radix-ui/react-dialog": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-slot": "latest",
+    "@stripe/stripe-js": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "mercadopago": "latest",
+    "next": "14.x",
+    "next-auth": "latest",
+    "next-intl": "latest",
+    "next-themes": "latest",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "prisma": "latest",
+    "tailwindcss": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
