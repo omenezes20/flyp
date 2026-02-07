@@ -1,1 +1,29 @@
-{"nav":{"modules":"Módulos","pricing":"Preços","language":"Idioma","theme":"Tema","logout":"Sair"},"hero":{"title":"Flyp ERP","subtitle":"Gestão empresarial completa e inteligente"},"pricing":{"title":"Planos de Preços"},"dashboard":{"title":"Dashboard"},"modules":{"pdv":"PDV","inventory":"Estoque"},"buttons":{"save":"Salvar","cancel":"Cancelar"}}
+{
+  "landing": {
+    "modules": "Módulos",
+    "pricing": "Preços",
+    "access": "Acessar Sistema",
+    "subtitle": "Gestão empresarial completa e inteligente",
+    "headline": "Centralize vendas, estoque, financeiro e operações em um ERP moderno e acessível.",
+    "ctaStart": "Começar Grátis por 14 dias",
+    "ctaPlans": "Ver Planos",
+    "moduleRetail": "Varejo inteligente",
+    "moduleMarket": "Mercados e atacado",
+    "moduleWorkshop": "Oficinas e serviços",
+    "moduleDealer": "Concessionárias",
+    "moduleServices": "Serviços recorrentes",
+    "moduleControl": "Controle operacional",
+    "moduleDesc": "Fluxos completos com automação e indicadores em tempo real."
+  },
+  "pricing": {
+    "title": "Planos para crescer com você",
+    "subtitle": "Escolha o plano ideal e ative módulos conforme sua operação.",
+    "cta": "Começar agora"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Resumo da operação e indicadores principais.",
+    "modules": "Módulos do Sistema",
+    "activities": "Atividades Recentes"
+  }
+}

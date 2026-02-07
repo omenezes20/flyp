@@ -1,1 +1,29 @@
-{\n  \"hello\": \"Hello\",\n  \"welcome\": \"Welcome to Flyp!\",\n  \"goodbye\": \"Goodbye!\"\n}
+{
+  "landing": {
+    "modules": "Modules",
+    "pricing": "Pricing",
+    "access": "Access System",
+    "subtitle": "Complete and intelligent business management",
+    "headline": "Centralize sales, inventory, finance, and operations in a modern, accessible ERP.",
+    "ctaStart": "Start Free for 14 days",
+    "ctaPlans": "View Plans",
+    "moduleRetail": "Smart retail",
+    "moduleMarket": "Markets and wholesale",
+    "moduleWorkshop": "Workshops and services",
+    "moduleDealer": "Dealerships",
+    "moduleServices": "Recurring services",
+    "moduleControl": "Operational control",
+    "moduleDesc": "Complete flows with automation and real-time indicators."
+  },
+  "pricing": {
+    "title": "Plans that grow with you",
+    "subtitle": "Choose the ideal plan and activate modules for your operation.",
+    "cta": "Get started"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Operational summary and key indicators.",
+    "modules": "System Modules",
+    "activities": "Recent Activities"
+  }
+}

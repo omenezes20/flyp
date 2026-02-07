@@ -1,28 +1,51 @@
 import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-export default NextAuth({
+export const authOptions = {
   providers: [
-    Providers.Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    // Add more providers as needed
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' }
+      },
+      async authorize(credentials) {
+        const demoEmail = process.env.DEMO_USER_EMAIL ?? 'demo@flyp.com';
+        const demoPassword = process.env.DEMO_USER_PASSWORD ?? 'demo123';
+
+        if (
+          credentials?.email === demoEmail &&
+          credentials?.password === demoPassword
+        ) {
+          return {
+            id: 'demo-user',
+            email: demoEmail,
+            name: 'Demo Owner',
+            role: 'OWNER',
+            tenantId: 'demo-tenant'
+          };
+        }
+        return null;
+      }
+    })
   ],
-  database: process.env.DATABASE_URL,
-  session: {
-    jwt: true,
-  },
+  session: { strategy: 'jwt' as const },
   callbacks: {
-    async jwt(token, user) {
+    async jwt({ token, user }: { token: any; user?: any }) {
       if (user) {
-        token.id = user.id;
+        token.role = user.role;
+        token.tenantId = user.tenantId;
       }
       return token;
     },
-    async session(session, token) {
-      session.user.id = token.id;
+    async session({ session, token }: { session: any; token: any }) {
+      session.user.role = token.role;
+      session.user.tenantId = token.tenantId;
       return session;
-    },
-  },
-});
+    }
+  }
+};
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
