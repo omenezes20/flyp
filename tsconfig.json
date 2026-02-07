@@ -1,0 +1,1 @@
+{\n  "compilerOptions": {\n    "target": "es6",\n    "module": "esnext",\n    "strict": true,\n    "jsx": "preserve",\n    "esModuleInterop": true,\n    "skipLibCheck": true,\n    "forceConsistentCasingInFileNames": true,\n    "noEmit": true\n  },\n  "include": [\n    "app/**/*",\n    "next-env.d.ts"\n  ],\n  "exclude": [\n    "node_modules"\n  ]\n}
