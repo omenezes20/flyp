@@ -1,0 +1,23 @@
+# Node.js
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Node_modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Next.js
+.next/
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
